@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital@1&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular';
+    justify-content: space-between;
+}
+
+.navbar{
+    background:linear-gradient(rgba(255, 8, 0, 0.699) 30% 50%, rgb(255, 81, 0)90%  60%,rgba(235, 252, 5, 0.822)20% 50%);
+    height:100%;
+    width:100%;
+    margin-top:5px;
+    position: static;
+}
+.navbar ul{
+    margin: auto;
+}
+.navbar ul li{
+    display: inline-block;
+}
+.navbar ul li a{
+list-style-type:none;
+color: white;
+ text-decoration:none;
+ padding:10px;
+ transition:1.5s;
+ cursor: pointer;
+ display:flex;
+ font-family: 'Noto Serif';
+}
+.navbar ul li a img{
+    height:50px;
+    position:relative;
+}
+.navbar ul li a:hover{
+    background-color: rgba(114, 103, 103, 0.884);
+    transition:1s;
+    border-radius:10px;
+    color:oldlace;
+    stroke: none;
+}
+.navrightsite{
+    float:right;
+    text-align: center;
+    padding-top:10px;
+}
+
+
+
+
+
+
+.sectionmain{
+  font-weight:200;
+  font-feature-settings: "abvm";
+}
+.sectioncontainer{
+    display:flex;
+}
+.sectioncontainer .itsite{
+    background:linear-gradient(red 0%, orange 10% 30%, yellow 50% 70%, green 90% 100%);
+    color: rgb(228, 201, 201);
+    margin-top:3em;
+    justify-items: center;
+    width:70%;
+    height:500px;
+    margin-left:10px;
+    border-radius:20px;
+    font-style:bold;
+    text-shadow:4px 4px 4px;
+
+}
+.img-it{
+    width:100px;
+    height:100px;
+    border: 4px double rgb(13, 36, 247);
+    border-radius:50%;
+    display:block;
+    background-color: black;
+    margin-left:180px;
+    margin-top:-0.003em;
+    cursor: pointer;
+    justify-items: center;
+
+}
+.sectioncontainer .civilsite{
+    background:linear-gradient(red 0%, orange 10% 30%, yellow 50% 70%, green 90% 100%);
+    margin-top:3em;
+    justify-items: center;
+    width:70%;
+    height:500px;
+    margin-left:10px;
+    border-radius:20px;
+    font-style:bold;
+    font-size:18px;
+    text-shadow:4px 4px 4px;
+}
+.img-civil{
+    width:100px;
+    height:100px;
+    border: 4px double rgb(13, 36, 247);
+    border-radius:50%;
+    display:block;
+    background-color: black;
+    margin-left:180px;
+    margin-top:-0.003em;
+    cursor: pointer;
+    justify-items: center;
+
+}
+
+
+
+footer {
+    border-top: 1px solid rgb(113, 133, 4);
+    padding:20px 10px;
+    background:linear-gradient(red 10%, orange 20% 30%, yellow 60% 70%, green 90% 100%);
+}
+
+footer p {
+    margin-bottom: 0px;
+    color: rgb(19, 15, 15);
+}
+
+footer p a {
+    color: rgb(19, 13, 13);
+}
+
+footer a:hover {
+    color: #FFF;
+}
+

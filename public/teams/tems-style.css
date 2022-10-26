@@ -1,0 +1,245 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital@1&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular';
+    justify-content: space-between;
+}
+html{
+    height:100%;
+}
+body{
+    background-color:rgb(102, 96, 92);
+    min-height:100%;
+    display:flex;
+    flex-direction:column;
+}
+/*Member or Our Teams Of DRMPI*/
+.member{
+    display:inline-block;
+    margin-left:20px;
+    background-color: rgb(117, 146, 146);
+    width:290px;
+    height:400px;
+    border-radius: 10px;
+    margin-top:50px;
+    box-shadow:4px 4px 4px 4px rgb(70, 54, 43) ;
+    position: relative;
+}
+.member img{
+    width: 200px;
+    height:200px;
+    margin-top:8px;
+    margin-left:50px;
+}
+.teach{
+    border-radius:100px;
+    border:5px double rgb(0, 0, 0);
+    width:80px;
+    height:90px;
+    background-color: aqua;
+    cursor: pointer;
+    margin-top: 0%;
+}
+.member .teamspara{
+    color:#0034;
+    font-size:large;
+    font-family: 'Noto Serif', serif;
+    margin-left:50px;
+}
+.teamspara1{
+    color: rgb(19, 42, 61);
+    margin-left:9px; 
+    font-size:15px; 
+    
+}
+.teamspara0{
+   margin-top:5px;
+    text-align: center;
+}
+
+/*navigation Bar Start */
+.navbar{
+    background:linear-gradient(rgba(255, 8, 0, 0.699) 30% 50%, rgb(255, 81, 0)90%  60%,rgba(235, 252, 5, 0.822)20% 50%);
+    height:100%;
+    width:100%;
+    margin-top:5px;
+    position: static;
+}
+.navbar ul{
+    margin: auto;
+}
+.navbar ul li{
+    display: inline-block;
+}
+.navbar ul li a{
+list-style-type:none;
+color: white;
+ text-decoration:none;
+ padding:10px;
+ transition:1.5s;
+ cursor: pointer;
+ display:flex;
+ font-family: 'Noto Serif';
+}
+.navbar ul li a img{
+    height:50px;
+    position:relative;
+}
+.navbar ul li a:hover{
+    background-color: rgba(114, 103, 103, 0.884);
+    transition:1s;
+    border-radius:10px;
+    color:oldlace;
+    stroke: none;
+}
+.navrightsite{
+    float:right;
+    text-align: center;
+    padding-top:10px;
+}
+/*Navigation Bar End*/
+
+.teamspara0{
+ animation:animate 9s ease-out infinite;
+ cursor:pointer;
+}
+@keyframes animate{
+    50%{
+        color:red;
+    }
+    60%{
+        color:green;
+    }
+    75%{
+        color:brown;
+    }
+    90%{
+        color:aqua;
+    }
+    100%{
+        color:chartreuse;
+    }
+}
+/*Icon Style Start*/
+.fa-brands{
+    margin-top:5px;
+ padding:10px;
+}
+.fa-facebook{
+    color:blue;
+}
+.fa-facebook:hover{
+    color:blue;
+}
+.fa-facebook-messenger{
+    color: rgba(130, 14, 189, 0.911);
+}
+.fa-facebook-messenger:hover{
+    color: rgba(130, 14, 189, 0.911);
+}
+/*Icon Style End*/
+
+
+#logo-att{
+    width:30px;
+    height:30px;
+    position:relative;
+    margin-top:-100px;
+    margin-left:-45px;
+    color:blue;
+    cursor: pointer;
+ 
+}
+ 
+  .carousel-cell {
+    margin-right:0px;
+  }
+  
+
+  .carousel-cell:before {
+    display: block;
+    text-align: center;
+  }
+iframe{
+ height:250px;
+ width:100%;
+ margin-top:40px;
+ margin-right:10px;
+ filter: invert(100%);
+  }
+  footer div{
+    background-color: black;
+    font-family: 'Times New Roman';
+    color:white;
+    display:inline;
+  }
+  .copyright.rightsite{
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+  }
+@media screen and(min-width:1000px)and(max-width:458px){
+    .copyright {
+        padding:3px;
+        height:10px;
+    }
+    .subscribe input {
+        font-size:small;
+        padding:.5px;
+    }
+    textarea {
+        width:10px;
+    }
+    body{
+        width: 100%;
+    }
+    footer div {
+ height:10px;
+ font-size: smaller;
+    }
+    .copyright{
+        padding:2px;
+        border:none;
+        height:10px;
+      }
+      .copyright h1{
+        font-size:1.3rem;
+      }
+      .copyright p{
+        font-size:1.3rem;
+      }
+      .socallink {
+        padding: 0px;
+        display: inline;
+    }
+    
+}
+.flickity-viewport {
+   overflow: hidden;
+  position: relative;
+  height: 100%;
+}
+
+footer {
+    border-top: 1px solid rgb(113, 133, 4);
+    padding:20px 10px;
+    background:linear-gradient(red 10%, orange 20% 30%, yellow 60% 70%, green 90% 100%);
+    margin-top:auto;
+}
+
+footer p {
+    margin-bottom: 0px;
+    color: rgb(19, 15, 15);
+}
+
+footer p a {
+    color: rgb(19, 13, 13);
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #FFF;
+}

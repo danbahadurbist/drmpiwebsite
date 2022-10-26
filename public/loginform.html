@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="favicon.ico" rel='icon'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+	<title> Login And Register Form</title>
+	<link rel="icon" href="Faculty/favicon.ico">
+	
+</head>
+<style>
+.hsubs{
+	text-decoration: none;
+  font-size:40px;
+  font-family: monospace;
+  justify-content: top;
+}
+.headersite{
+ justify-content: top;
+ justify-items:top;
+ text-align:left;
+ float: left;
+ color: blanchedalmond;
+ background-color: rgb(56, 49, 49);
+ margin-left: 10px;
+ font-family: Arial, Helvetica, sans-serif;
+ font-size: 2em;
+}
+.wrapper{
+	float: left;
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
+
+.login-active{
+	float:left;
+}
+.forgot{
+	width: 70vh;
+	justify-items: center;
+	text-align: center;
+	justify-content: left;
+	float: left;
+}
+
+
+:root {
+
+	--grey: #F4F2FF;
+	--dark-grey: #B7B7B7;
+
+	--green: #23AE00;
+	--light-green: #BDFFAC;
+
+	--red: #FE2727;
+	--light-red: #FFD2D2;
+
+	--blue: #277FFE;
+	--light-blue: #B6C6FF;
+	--dark-blue: #1368E3;
+
+	--bs: #AECFFF;
+	--text: #9B9B9B;
+}
+
+a {
+	color: var(--blue);
+	transition: all .3s ease;
+	text-decoration: none;
+}
+
+a:hover {
+	color: var(--dark-blue);
+}
+
+body {
+	background:linear-gradient(lightblue, lightgreen,lightyellow,orange);
+	display: flex;
+	justify-content:center;
+	align-items:center;
+	min-height: 100vh;
+	padding: 0 16px;
+}
+
+.container {
+	max-width: 500px;
+	width: 100%;
+	position: absolute;
+}
+form {
+	width: 100%;
+	padding: 28px;
+	border-radius: 12px;
+	background: rgb(255, 255, 255);
+	position:absolute;
+	top: 50%;
+	transform: translateY(-50%) scale(.8);
+	opacity: 0;
+	z-index: 100;
+	transition: all .3s ease;
+	transition-delay: 0s;
+}
+form.active {
+	transform: translateY(-50%);
+	opacity: 1;
+	z-index: 200;
+	transition-delay: .3s;
+}
+.title {
+	font-size: 24px;
+	font-weight: 600;
+	margin-bottom: 20px;
+}
+.form-group {
+	margin-bottom: 14px;
+}
+.form-group label {
+	display: inline-block;
+	margin-bottom: 4px;
+}
+.input-group {
+	width: 100%;
+	position:relative;
+}
+.input-group input {
+	padding: 12px 40px 12px 20px;
+	outline: none;
+	border-radius: 6px;
+	border: 1px solid var(--dark-grey);
+	width: 100%;
+	transition: all .3s ease;
+}
+
+/* Validation */
+.input-group input:focus,
+.input-group input:not(:placeholder-shown) {
+	border-color: var(--blue);
+	background: var(--grey);
+}
+.input-group input:focus + i,
+.input-group input:not(:placeholder-shown) + i {
+	color: var(--blue);
+}
+.input-group input:focus:valid {
+	box-shadow: 0 0 0 4px var(--light-green);
+}
+.input-group input:valid:not(:placeholder-shown) {
+	border-color: var(--green);
+}
+.input-group input:valid:not(:placeholder-shown) + i {
+	color: var(--green);
+}
+.input-group input:invalid:not(:placeholder-shown) {
+	border-color: var(--red);
+}
+.input-group input:invalid:not(:placeholder-shown) + i {
+	color: var(--red);
+}
+.input-group input:focus:invalid {
+	box-shadow: 0 0 0 4px var(--light-red);
+}
+.input-group input:focus,
+.input-group input:focus:placeholder-shown {
+	box-shadow: 0 0 0 4px var(--bs);
+}
+/* Validation */
+
+.input-group i {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 20px;
+	color: var(--text);
+	pointer-events: none;
+	transition: all .3s ease;
+}
+.form-group .help-text {
+	font-size: 12px;
+	color: var(--text);
+}
+.btn-submit {
+	padding: 12px 0;
+	display: block;
+	width: 100%;
+	color: #fff;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: all .3s ease;
+	border: none;
+	font-weight: 500;
+	background: var(--blue);
+	margin-bottom: 20px;
+}
+.btn-submit:hover {
+	background: var(--dark-blue);
+}
+
+.spanregister{
+    color:#ffffff;
+    margin-left:2rem;
+    font-size:medium;
+    background:linear-gradient(lightblue ,orange, rgba(211, 6, 6, 0.753));
+    transition: all 1.5s;
+    padding:9px;
+    border: none;
+    border-radius:5px;
+    cursor: pointer;
+    font-weight: 800;
+    font-style: unset;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.spanregister::before{
+    color: #277FFE;
+}
+.spanregister::after{
+    color: #FE2727;
+}
+.spanregister:hover{
+    color: #d37319b6;
+  background-color: #1368E3;
+}
+@media(max-width:465px)
+{
+.title {
+	font-size:20px;
+	font-weight:200;
+}
+.spanregister{
+    margin-left:0.5rem;
+}
+.spanregister:hover{
+	background:transparent;
+	transition: all 1.5s ease ;}
+form{
+	width:100%;
+	background: rgb(201, 199, 199);
+	z-index: 100;
+    justify-items: center;
+    align-items: center;
+    margin-left:10px;
+}
+}
+@media(max-width:365px)
+{
+.title {
+	font-size:15px;
+	font-weight:100;
+}
+.spanregister{
+    margin-left:0rem;
+    font-size:10px;
+}
+form{
+	width:100%;
+	background:transparent;
+	z-index: 100;
+    justify-items: center;
+    align-items: center;
+    margin-left:5px;
+}
+.forgot {
+	width:100%;
+	float: left;
+}
+}
+
+
+</style>
+<body>
+	<div class="container">
+<form action="https://formspree.io/f/xjvzeaky" class="register" method="POST">
+   <h2 class="title">Register your account <span></span> </h2>
+	 <div class="form-group">
+	   <label for="email">Email</label>
+		 <div class="input-group">
+			<input type="email" id="email" placeholder="Email address" name="email" required>
+			  <i class='bx bx-envelope'></i>
+				</div>
+			     </div>
+			      <div class="form-group">
+				     <label for="password">Password</label>
+					<div class="input-group">
+				   <input type="password" pattern=".{8,}" id="password" placeholder="Your password" name="password" required>
+				 <i class='bx bx-lock-alt' ></i>
+			   </div>
+			<span class="help-text">At least 8 characters</span>
+		</div>
+	  <div class="form-group">
+	<label for="confirm-pass">Confirm password</label>
+  <div class="input-group">
+<input type="password" id="confirm-pass" placeholder="Enter password again"name="conpassword"required>
+<i class='bx bx-lock-alt' ></i>
+</div>
+	<span class="help-text">Confirm password must be same with password</span>
+</div>
+ <button type="submit" class="btn-submit" name="submit">Register</button>
+	<p>I already have an account. <a href="#" onclick="switchForm('login', event)">Login</a></p>
+
+
+
+</form>
+<form action="https://formspree.io/f/xjvzeaky" class="login active" method="post">
+	<h2 class="title">Login with your account <button class="spanregister" onclick="switchForm('register', event)">Register</button></h2>
+	  <div class="form-group">
+		  <label for="email">Email</label>
+		   <div class="input-group">
+			   <input type="email" id="email" placeholder="Email address" name="logemail" required>
+			<i class='bx bx-envelope'></i>
+		  </div>
+		</div>
+	 <div class="form-group">
+	<label for="password">Password</label>
+<div class="input-group">
+<input type="password" pattern=".{8,}" id="password" placeholder=" Enter Your password" name="logpassword" required>
+<i class='bx bx-lock-alt' ></i>
+</div>
+<span class="help-text">At least 8 characters</span>
+</div>
+<button type="submit" class="btn-submit" name="submit">Login</button>
+<a href="#"><a href="#" onclick="switchForm('forgot', event)">Forgot password ?</a></a>
+<p>I don't have an account. <a href="#" onclick="switchForm('register', event)">Register</a></p>
+
+
+
+
+
+</form>
+</div>
+
+<form action="https://formspree.io/f/xjvzeaky" class="forgot" method="POST">
+	<h2 class="title">Forgot Password</h2>
+	  <div class="form-group">
+		  <div class="input-group">
+			 <input type="email" id="email" placeholder="Email address" name="foremail" required>
+			   <i class='bx bx-envelope'></i>
+				 </div>
+				  </div>
+				   <div class="form-group">
+					 <div class="input-group">
+				  <i class='bx bx-lock-alt' ></i>
+				</div>
+		 </div>
+	   <div class="form-group">
+   <div class="input-group">
+ <i class='bx bx-lock-alt' ></i>
+ </div>
+ </div>
+  <button type="submit" class="btn-submit" name="submit">Send Code</button>
+  <p>I don't have an account. <a href="#" onclick="switchForm('register', event)">Register</a></p>
+ </form>
+ </div>
+<script>
+
+function switchForm(className, e) {
+	e.preventDefault();
+	const allForm = document.querySelectorAll('form');
+	const form = document.querySelector(`form.${className}`);
+
+	allForm.forEach(item=> {
+		item.classList.remove('active');
+	})
+	form.classList.add('active');
+}
+
+
+const registerPassword = document.querySelector('form.register #password');
+const registerConfirmPassword = document.querySelector('form.register #confirm-pass');
+
+registerPassword.addEventListener('input', function () {
+	registerConfirmPassword.pattern = `${this.value}`;
+})
+
+
+</script>
+</body>
+</html>

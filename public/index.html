@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Dinesh Ramji Memorial Polytechnic Institute</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="keywords" content="DRMPI">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+
+    <link rel="stylesheet" href="css/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="css/bootstrap-a25aa29b43ba.css">
+    <link rel="stylesheet" href="css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link href="fontawesome/css/fontawesome.min.css" rel="stylesheet">
+    <link href="fontawesome/css/solid.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon.ico">
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <style>
+    </style>
+    <noscript>
+      <meta http-equiv="refresh" content="0.0;url=nojs.php">
+    </noscript>
+</head>
+<style>
+    .datetime{
+        float:left;
+        font-weight:1500px;
+        font-family:'Lucida Sans', 'Lucida Sans Regular';
+        font-size: large;
+    }
+    .loginrow{
+        float: right;
+    }
+    .progress{
+        height:5px;
+        background-color:rgb(255, 252, 252);
+        width:100%;
+        position:fixed;
+        top: 0px;
+        left:0px;
+    }
+    .progress_highlight{
+        transition: width 0.15s linear;
+        background-color:rgb(255, 0, 0);
+        height:100%;
+        width:0;
+    }
+
+ .member-group {
+	margin: 0px 0 20px 50px;
+	border: 1px solid rgb(218, 202, 202);
+	text-align: center;
+	padding:0.5rem;
+	border-radius: 5px;
+	background-color: rgb(90, 89, 89);
+    color:#FFF;
+    margin-left:10px;
+}
+
+.list-group-item + .list-group-item {
+  border-top-width: 0;
+  position: revert;
+}
+
+
+
+
+body.dark {
+  background-color: #18191a;
+}
+.toggle {
+  position:relative;
+  height:25px;
+  width:50px;
+  border-radius:10px;
+  background:linear-gradient(rgba(29, 70, 2, 0.836) , rgb(150, 131, 131), rgb(81, 81, 146));
+  box-shadow:4px 4px 4px rgba(10, 126, 6, 0.699);
+  cursor: pointer;
+  float: right;
+  margin-top:10px;
+  margin-left:5px;
+}
+.toggle::before {
+  content: "";
+  position: absolute;
+  height:20px;
+  width:30px;
+  background: #eceeec;
+  border-radius:10px;
+  top:50%;
+  left:10px;
+  transform: translateY(-50%);
+  transition: all 0.3s ease-in-out;
+}
+.toggle.active::before {
+  background-color: #18191a;
+  left: calc(60% - 1px - 10px);
+}
+
+
+</style>
+
+<body>
+  <div class="progress">
+    <div class="progress_highlight" id="js_highlight"></div>
+    </div>
+    <div class="container" id="js_container">
+    <div class="top_header">
+        <div class="row">
+
+            <div class="datetimerow">
+            <body onload="initClock()">
+            <div class="datetime">
+                <div class="date">
+                  <span id="dayname">Day</span>,
+                  <span id="month">Month</span>
+                  <span id="daynum">00</span>,
+                  <span id="year">Year</span>
+                </div>
+                <div class="time">
+                  <span id="hour">00</span>:
+                  <span id="minutes">00</span>:
+                  <span id="seconds">00</span>
+                  <span id="period">AM</span>
+                </div>
+              </div>
+              <script type="text/javascript">
+                function updateClock(){
+                  var now = new Date();
+                  var dname = now.getDay(),
+                      mo = now.getMonth(),
+                      dnum = now.getDate(),
+                      yr = now.getFullYear(),
+                      hou = now.getHours(),
+                      min = now.getMinutes(),
+                      sec = now.getSeconds(),
+                      pe = "AM";
+            
+                      if(hou >= 12){
+                        pe = "PM";
+                      }
+                      if(hou == 0){
+                        hou = 12;
+                      }
+                      if(hou > 12){
+                        hou = hou - 12;
+                      }
+            
+                      Number.prototype.pad = function(digits){
+                        for(var n = this.toString(); n.length < digits; n = 0 + n);
+                        return n;
+                      }
+            
+                      var months = ["January", "February", "March", "April", "May", "June", "July", "Augest", "September", "October", "November", "December"];
+                      var week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                      var ids = ["dayname", "month", "daynum", "year", "hour", "minutes", "seconds", "period"];
+                      var values = [week[dname], months[mo], dnum.pad(2), yr, hou.pad(2), min.pad(2), sec.pad(2), pe];
+                      for(var i = 0; i < ids.length; i++)
+                      document.getElementById(ids[i]).firstChild.nodeValue = values[i];
+                }
+            
+                function initClock(){
+                  updateClock();
+                  window.setInterval("updateClock()", 1);
+                }
+
+
+                /* Progress bar */
+    const container = document.getElementById('js_container');
+    const highlight = document.getElementById('js_highlight');
+    var containerHeight;
+
+    window.onscroll =function(){
+        containerHeight=container.offsetHeight - window.innerHeight;
+        containerPos = container.getBoundingClientRect();
+        diff = containerHeight + containerPos.top;
+        progressPercentage = diff / containerHeight *100;
+        cssWidth = Math.floor(100 - progressPercentage);
+        highlight.style.width = cssWidth + "%";
+    }
+
+
+
+                </script>
+                   <div class="toggle"></div>
+
+                   <!-- JavaScript -->
+                   <script>
+                     const body = document.querySelector("body"),
+                       toggle = document.querySelector(".toggle");
+               
+                     let getMode = localStorage.getItem("mode");
+                     if (getMode && getMode === "dark") {
+                       body.classList.add("dark");
+                       toggle.classList.add("active");
+                     }
+               
+                     toggle.addEventListener("click", () => {
+                       body.classList.toggle("dark");
+               
+                       if (!body.classList.contains("dark")) {
+                         return localStorage.setItem("mode", "light");
+                       }
+                       localStorage.setItem("mode", "dark");
+                     });
+               
+                     toggle.addEventListener("click", () => toggle.classList.toggle("active"));
+                   </script>
+
+
+      
+
+                <a href="loginform.html" class="loginrow" style="border-radius:5px; margin-top:10px;">Login</a></div>
+
+        </div>
+    </div>
+    <div class="header">
+        <div class="row">
+            <div class="col-lg-3 text-end"><img src="img/logo-admin.png" class="img-responsive" title="ctevt logo" width="60px"></div>
+            <div class="col-lg-6">
+                <h3>Dimesh Ramji Memorial Polytechnic Institute</h3>
+                <h3>Sindhupalchok-05,Chautara</h3>
+            </div>
+            <div class="col-lg-3 text-end">
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+
+        <div class="page-header" id="banner">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="list-group">
+
+                        <a href="" class="list-group-item active">Home</a>
+                        <a href="#notice" class="list-group-item ">Notice</a>
+                        <a href="result.html" class="list-group-item "></i> Results</a>
+                        <a href="#" class="list-group-item "></i>DRMPI Students</a>
+                        <a href="Teams.html" class="list-group-item "></i>DRMPI Teams</a>
+                        <a href="program.html" class="list-group-item "></i>Programs</a>
+                        <a href="https://www.drmpi.edu.np/" style="color:#f10808;" class="list-group-item "></i>More Details</a></i><br/>
+                        <hr/><br/>
+                        <img src="home img/admin.png" style="border-radius:10px;"><br>
+                        <hr><br/>
+                        <a href="home img/imagadmin.jpg"class="imag" ><img src="home img/imagadmin.jpg" width="100%" height="700rem" aria-controls class="imag" style="border-radius: 10px;"></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="jumbotron">
+                        <h4>Welcome</h4>
+                        <p style="text-align:justify;"id="animate">
+
+
+
+<!--image slider start-->
+<div class="slider" id="slidernon">
+    <div class="slides">
+      <!--radio buttons start-->
+      <input type="radio" name="radio-btn" id="radio1"id="block">
+      <input type="radio" name="radio-btn" id="radio2"id="block">
+      <input type="radio" name="radio-btn" id="radio3"id="block">
+      <input type="radio" name="radio-btn" id="radio4"id="block">
+      <input type="radio" name="radio-btn" id="radio5"id="block">
+      <!--radio buttons end-->
+      <!--slide images start-->
+      <div class="slide first">
+        <img src="home img/29.jpg" id="img1">
+      </div>
+      <div class="slide" >
+        <img src="home img/ITSlider1.jpg" id="img1">
+      </div>
+      <div class="slide">
+        <img src="home img/program.png" id="img1">
+      </div>
+      <div class="slide">
+        <img src="home img/2.jpg" id="img1">
+      </div>
+      <div class="slide">
+        <img src="home img/29.jpg" id="img1">
+      </div>
+      <!--slide images end-->
+      <!--automatic navigation start-->
+      <div class="navigation-auto" id="block">
+        <div class="auto-btn1"></div>
+        <div class="auto-btn2"></div>
+        <div class="auto-btn3"></div>
+        <div class="auto-btn4"></div>
+        <div class="auto-btn5"></div>
+      </div>
+      <!--automatic navigation end-->
+    </div>
+    <!--manual navigation start-->
+    <div class="navigation-manual" id="block2">
+      <label for="radio1" class="manual-btn"></label>
+      <label for="radio2" class="manual-btn"></label>
+      <label for="radio3" class="manual-btn"></label>
+      <label for="radio4" class="manual-btn"></label>
+      <label for="radio5" class="manual-btn"></label>
+    </div>
+    <!--manual navigation end-->
+  </div>
+  <!--image slider end-->
+
+  <script type="text/javascript">
+  var counter = 1;
+  setInterval(function(){
+    document.getElementById('radio' + counter).checked = true;
+    counter++;
+    if(counter >5){
+      counter = 1;
+    }
+  }, 5000);
+  </script>
+
+</p>
+
+ </div>
+   <style>
+html{
+  height:100%;
+}
+body{
+  display: flex;
+  flex-direction: column;
+  min-height:100%;
+}
+footer{
+  margin-top: auto;
+}
+@media(max-width:1600px)
+{
+    #img1{
+    width:550px;/*image main Break point*/
+    height:80%;
+    margin-left:0;
+ }
+ #slidernon{
+	width:550px;
+	height:50%;
+    margin-left: 0;
+}
+
+}
+
+
+@media(max-width:900px)
+{
+ #videoplay{
+    width:100%;
+    border-radius:10px;
+ }
+ #img1{
+    width:100%;/*image main Break point*/
+    height:90%;
+ }
+ .slides{
+  width: 100%;
+  height:50%;
+}
+.navigation-auto div:not(:last-child){
+ display: block;
+}
+#slidernon{
+	width:100%;
+	height:150px;
+}
+#block{
+    display:none;
+}
+#block2{
+    display: none;
+}
+html{
+  height:100%;
+}
+body{
+  display: flex;
+  flex-direction: column;
+  min-height:100%;
+}
+footer{
+  margin-top: auto;
+}
+}
+ @media(max-width:990px){
+#slidernon{
+	width:100%;
+	height:400px;
+}
+#img1{
+    width:100%;/*image main Break point*/
+ }
+ #videoplay{
+    width:100%;
+    border-radius:10px;
+ }
+ #block{
+    display:none;
+}
+#block2{
+    display: none;
+}
+html{
+  height:100%;
+}
+body{
+  display: flex;
+  flex-direction: column;
+  min-height:100%;
+}
+footer{
+  margin-top: auto;
+}
+
+ }
+ @media(max-width:500px){
+    #slidernon{
+	width:100%;
+	height:240px;
+}
+#img1{
+    width:100%;/*image main Break point*/
+    height:250px;
+ }
+ html{
+  height:100%;
+}
+body{
+  display: flex;
+  flex-direction: column;
+  min-height:100%;
+}
+footer{
+  margin-top: auto;
+}
+
+ }
+
+
+.slider{
+    margin:0;
+    padding: 0;
+  width:630px;
+  height: 490px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.slides{
+  width: 500%;
+  height: 500px;
+  display: flex;
+}
+
+.slides input{
+  display: none;
+}
+
+.slide{
+  width: 20%;
+  transition: 2s;
+}
+
+.slide img{
+  width: 800px;
+  height: 500px;
+}
+
+/*css for manual slide navigation*/
+
+.navigation-manual{
+  position: absolute;
+  width: 800px;
+  margin-top: -40px;
+  display: flex;
+  justify-content: center;
+}
+
+.manual-btn{
+  border: 2px solid #40D3DC;
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: .1s;
+}
+
+.manual-btn:not(:last-child){
+  margin-right: 40px;
+}
+
+.manual-btn:hover{
+  background: #40D3DC;
+}
+
+#radio1:checked ~ .first{
+  margin-left: 0;
+}
+
+#radio2:checked ~ .first{
+  margin-left: -20%;
+}
+
+#radio3:checked ~ .first{
+  margin-left: -40%;
+}
+
+#radio4:checked ~ .first{
+  margin-left: -60%;
+}
+#radio5:checked ~ .first{
+  margin-left: -60%;
+}
+
+/*css for automatic navigation*/
+
+.navigation-auto{
+  position: absolute;
+  display: flex;
+  width: 800px;
+  justify-content: center;
+  margin-top: 460px;
+}
+
+.navigation-auto div{
+  border: 2px solid #40D3DC;
+  padding: 5px;
+  border-radius: 10px;
+  transition: 1s;
+}
+
+.navigation-auto div:not(:last-child){
+  margin-right:40px;
+}
+
+#radio1:checked ~ .navigation-auto .auto-btn1{
+  background: #40D3DC;
+}
+
+#radio2:checked ~ .navigation-auto .auto-btn2{
+  background: #40D3DC;
+}
+
+#radio3:checked ~ .navigation-auto .auto-btn3{
+  background: #40D3DC;
+}
+
+#radio4:checked ~ .navigation-auto .auto-btn4{
+  background: #40D3DC;
+}
+#radio5:checked ~ .navigation-auto .auto-btn5{
+  background: #3cb0b6;
+}
+.top_header {
+    background-color: #df5515;
+    color: #FFF;
+    padding: 7px 20px;
+    text-align: right;
+}
+.jumbotron {
+    background: none;
+    padding: 1rem;
+    color: rgb(25, 224, 7);
+}
+h4{
+    margin-bottom:0.5rem;
+    font-weight: 5000;
+    text-align: center;
+    justify-items: center;
+}
+
+   
+    </style>
+
+                    <div class="jumbotrons" style="background: #FFF;">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="acme-news-ticker"> 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h5 style="background: #EEE; padding: 10px;margin-top:10px;">Recent Notices</h5>
+                                <table width="100%" border="1" style="border-radius:10px;" bordercolor="#CCC" class="table table-striped table-hover " id="home_table">
+                                    <thead>
+                                        <tr>
+                                          <th width="10%" class="text-center">S.N</th>
+                                            <th width="55%" class="text-center">Notice Title</th>
+                                            <th width="15%" class="text-center">Published By</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="notice">
+                                      <tr>
+                                        <td>1</td>
+                                          <td><a href="https://scontent.fktm9-2.fna.fbcdn.net/v/t39.30808-6/308982312_738113657427530_2980038666087021453_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=730e14&_nc_ohc=kefpcPxL8fQAX_tf149&_nc_ht=scontent.fktm9-2.fna&oh=00_AT9i83h1LkAhYByCYWekMV3iO1tviOVKhxZaYxEXtUcz-A&oe=635E26B1">
+                                            शिक्षालय विदा र पठनपाठन सुरु गर्ने सम्बन्धि सुचना</a></td>
+
+                                          <td>Admin</td>
+                                      </tr>
+
+                                        
+                                        <tr>
+                                            <td>2</td>
+                                            <td><a href="https://scontent.fktm9-2.fna.fbcdn.net/v/t39.30808-6/301540476_591213862652503_7232977337384290318_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=730e14&_nc_ohc=pMyUrIZjJBYAX8Iz9qd&_nc_oc=AQkb1p-a6lnX6dyBCZNfPClyNIWBgSD2d-HyFb7JVEfM1QAv2AavZsZnvPOQTppm0OM&tn=6GiU6yOij2TbBID5&_nc_ht=scontent.fktm9-2.fna&oh=00_AT9PP-_uKYX8t30SXw3qPqyjnj5OP9susIzgotb-cs4BJg&oe=635CCCE0">Admission Open soon for 2022
+                                                Programs: Diploma in Civil Engineering, Diploma in Information Technology</a></td>
+
+                                               <td>Admin</td>
+                                        </tr>
+
+  
+
+
+                                        <tr>
+
+                                        <td>3</td>
+                                            <td><a href="https://scontent.fktm9-2.fna.fbcdn.net/v/t39.30808-6/308556115_735740687664827_4811845238048773874_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=730e14&_nc_ohc=F-n2RpDpi6AAX-OVYlS&_nc_oc=AQmpn8cX_Amgty4IeCCmXBkRqhQL0iM8lBbBLcEol3TA6sQNq5xRxK4TTY2pDWBXWS4&_nc_ht=scontent.fktm9-2.fna&oh=00_AT-twZ_d0I8gZG1F3yWyBXX3DdkRv2oWrEY0hX3UmqPgYA&oe=635E7206">Re-Entrance Notice</a></td>
+
+                                            <td>Admin</td>
+                                        </tr>
+                                        <tr>
+
+                                          <td>4</td>
+                                              <td><a href="https://scontent.fktm9-2.fna.fbcdn.net/v/t1.6435-9/119524476_147722423668318_180416316340077019_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=730e14&_nc_ohc=9qknmKirXEcAX9yz4iw&_nc_oc=AQlSW6g2g3DPRqRqLP2IvqgzUpXmas8ZsRxjwYpnRZEyI1POthkCZIEpNQcWn3EluWI&_nc_ht=scontent.fktm9-2.fna&oh=00_AT8btJn-AO74Vqf9EUQF5vtsymYPAL6Vms4lBOOWvF4jhw&oe=637E51D7">Admission Open 2022
+                                              </a></td>
+                                              <td>Admin</td>
+                                          </tr>
+                                          <tr>
+                                            <td>5</td>
+                                                <td><a href="https://scontent.fktm9-2.fna.fbcdn.net/v/t1.6435-9/116708097_129512612155966_4453481152052930819_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=730e14&_nc_ohc=jSx4wl87U3YAX_4cDDS&_nc_ht=scontent.fktm9-2.fna&oh=00_AT-k5sCRuHxKYdrMxnadNlVDkUXrwJeQroGAzBF6pOa2aQ&oe=637D00FA">सुचि दर्ता सम्बन्धी सुचना ।
+                                                </a></td>
+                                                <td>Admin</td>
+                                            </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-lg-12 text-right" style="font-size: 13px;"><a href="#">More Notices<i class="fa-solid fa-angles-right" style="margin-left: 5px;"></i></a></div>
+                        </div>
+
+                    </div>
+                    <br/> <hr>
+                    <video src="video/Drmpi.mp4" autoplay width="650vh" controls muted id="videoplay" style="border-radius:10px;"></video>
+                </div>
+<style>
+.img-fluid{
+    border-radius:10px;
+    box-shadow:  5px  5px 4px 4px  rgb(180, 179, 180);
+
+}
+.acme-news-ticker {
+  position: revert;
+  display: none;
+}
+h5, .h5 {
+  font-size: 1.25rem;
+  text-align: center;
+}
+@media(max-width:340px)
+{
+ .datetime {
+  font-weight: 1500px;
+  font-size: medium;
+}
+#slidernon{
+	width:100%;
+	height:150px;
+}
+#img1{
+    width:100%;/*image main Break point*/
+    height:150px;
+ }
+}
+</style>
+
+
+                <div class="col-lg-3" id="member">
+                    <div class="member-group" >
+                        <img src="home img/pre.jpg" class="img img-fluid">
+                        <div><label><strong>Ramchandra Dahal</strong></label></div>
+                        <div><label>Principal, DRMPI</label></div>
+
+                    </div>
+                    <div class="member-group">
+                        <img src="home img/ITInstructor1.jpg" class="img img-fluid">
+                        <div><label><strong>Sunil Ghale</strong></label></div>
+                        <div><label>IT Department Head, DRMPI</label></div>
+
+                    </div>
+                    <div class="member-group">
+                        <img src="home img/binod.jpg" class="img img-fluid binod">
+                        <div><label><strong>Binod Basnet</strong></label></div>
+                        <div><label>CIVIL Department Head, DRMPI</label></div>
+                    </div>                
+                </div>
+
+            </div>
+        </div>
+        </div>
+        </div>
+        <footer>
+            <div class="row">
+                <div class="col-lg-4 col-sm-12 first">
+                    <p style="text-align:left;">Copyright: <a href="#">DRMPI @ 2022</a></p>
+                </div>
+                <div class="col-lg-4 col-sm-12 second">
+                    <p style="text-align:center;"><a  href="loginform.html" style="margin-left:20px;font-weight: bold;">User Login</a></p>
+                    <style>
+                        footer{
+                            height:100px;
+                            margin-top: auto;
+                        }
+                    </style>
+                </div>
+                <div class="col-lg-4 col-sm-12 third">
+                    <p style="text-align:right;">Email:<a href="https://www.gmail.com/">drmpi.sindhu@gmail.com</a> </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+
+<script>
+alert("HACKING COURSE पढ्न चाहानु हुन्छ भने  मलाई CONTACT गर्नु होला 🤙👌🥰!!!");
+
+
+
+
+</script>
+    <script src="js/acmeticker.js"></script>
+   <script src="js/src/alert.js"></script>
+   <script src="js/src/base-component.js"></script>
+   <script src="js/src/button.js"></script>
+   <script src="js/src/carousel.js"></script>
+   <script src="js/src/collapse.js"></script>
+   <script src="js/src/dropdown.js"></script>
+   <script src="js/src/modal.js"></script>
+   <script src="js/src/offcanvas.js"></script>
+   <script src="js/src/popover.js"></script>
+   <script src="js/src/scrollspy.js"></script>
+   <script src="js/src/tab.js"></script>
+   <script src="js/src/dom/data.js"></script>
+   <script src="js/src/dom/event-handler.js"></script>
+   <script src="js/src/dom/manipulator.js"></script>
+   <script src="js/src/dom/selector-engine.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+   <script src="js/dataTables.bootstrap5.min.js"></script>
+   <script src="js/jquery-3.6.0.min.js"></script>
+   <script src="js/jquery.dataTables.min.js"></script>
+</body>
+</html>
